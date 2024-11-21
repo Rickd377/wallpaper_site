@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+  <script src="./js/styles.js"></script>
+  <title>Wallo</title>
+</head>
+<body>
+
+  <header>
+    <div class="title-wrapper">
+      <img src="./assets/wallo_logo.png" alt="logo">
+      <h1 class="title">Wallo</h1>
+    </div>
+  
+    <div class="custom-select">
+      <div class="select-selected" data-value="all">All</div>
+      <div class="select-items select-hide">
+        <div data-value="all">All</div>
+        <div data-value="mobile">Mobile</div>
+        <div data-value="tablet">Tablet</div>
+        <div data-value="desktop">Desktop</div>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#" class="collections" data-target="collection-page"><i class="fa-sharp fa-light fa-album-collection"></i></a>
+    <a href="#" class="search" data-target="search-page"><i class="fa-sharp fa-light fa-magnifying-glass"></i></a>
+    <a href="#" class="home active" data-target="home-page"><i class="fa-sharp fa-light fa-house"></i></a>
+    <a href="#" class="settings" data-target="settings-page"><i class="fa-light fa-gear"></i></a>
+    <a href="#" class="profile" data-target="profile-page"><i class="fa-light fa-user"></i></a>
+  </nav>
+
+  <main>
+    <div id="collection-page"></div>
+
+    <div id="search-page"></div>
+
+    <div id="home-page">
+
+      <div class="main-container">
+        <div class="image-container" id="image-container">
+          <img src="./assets/images/mobile/image1.png" alt="" loading="eager">
+          <img src="./assets/images/mobile/image2.png" alt="" loading="eager">
+          <img src="./assets/images/mobile/image3.png" alt="" loading="eager">
+          <img src="./assets/images/mobile/image4.png" alt="" loading="eager">
+          <img src="./assets/images/mobile/image5.png" alt="" loading="eager">
+          <img src="./assets/images/desktop/image1.png" alt="" loading="eager">
+          <img src="./assets/images/desktop/image2.png" alt="" loading="eager">
+          <img src="./assets/images/desktop/image3.png" alt="" loading="eager">
+          <img src="./assets/images/desktop/image4.png" alt="" loading="eager">
+          <img src="./assets/images/desktop/image5.png" alt="" loading="eager">
+          <img src="./assets/images/tablet/image1.png" alt="" loading="eager">
+          <img src="./assets/images/tablet/image2.png" alt="" loading="eager">
+          <img src="./assets/images/tablet/image3.png" alt="" loading="eager">
+          <img src="./assets/images/tablet/image4.png" alt="" loading="eager">
+          <img src="./assets/images/tablet/image5.png" alt="" loading="eager">
+        </div>
+      </div>
+
+    </div>
+
+    <div id="settings-page"></div>
+
+    <div id="profile-page"></div>
+  </main>
+  
+  <script src="./js/general.js"></script>
+</body>
+</html>

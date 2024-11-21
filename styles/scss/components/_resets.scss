@@ -1,0 +1,63 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: $ff;
+  color: $text_color;
+  background-color: $bg_color;
+  min-height: 100dvh;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  @include flex;
+  overflow-x: hidden;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+p {
+  font-size: $fs_p;
+  font-weight: $fw_400;
+}
+
+#collection-page,
+#search-page,
+#home-page,
+#settings-page,
+#profile-page {
+  width: 100dvw;
+  min-height: 100dvh;
+  padding: 150px 0 0;
+  display: none;
+}
+
+#home-page {
+  display: block;
+}
