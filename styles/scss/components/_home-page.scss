@@ -17,13 +17,22 @@
 
       img {
         width: 100%;
-        break-inside: avoid;
         margin-bottom: 20px;
         border-radius: 15px;
         box-shadow: 4px 2px 10px rgba($black_color, 0.1);
         cursor: pointer;
         transition: filter 0.3s;
-        
+      
+        &.selected {
+          position: fixed;
+          height: 70vh;
+          width: auto;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 100;
+        }
+      
         &:hover {
           filter: brightness(0.9);
         }

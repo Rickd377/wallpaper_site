@@ -235,13 +235,20 @@ header .custom-select .select-hide {
 }
 #home-page .main-container .image-container img {
   width: 100%;
-  -moz-column-break-inside: avoid;
-       break-inside: avoid;
   margin-bottom: 20px;
   border-radius: 15px;
   box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: filter 0.3s;
+}
+#home-page .main-container .image-container img.selected {
+  position: fixed;
+  height: 70vh;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
 }
 #home-page .main-container .image-container img:hover {
   filter: brightness(0.9);

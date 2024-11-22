@@ -17,7 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION['ID'] = $row['ID'];
             $_SESSION['Username'] = $row['Username'];
-            header("Location: ../index.php");
+            $_SESSION['is_admin'] = $row['is_admin'];
+
+            // Debugging statements
+            error_log("User ID: " . $_SESSION['ID']);
+            error_log("Username: " . $_SESSION['Username']);
+            error_log("Is Admin: " . $_SESSION['is_admin']);
+
+            if ($row['is_admin']) {
+                header("Location: ./admin.php");
+            } else {
+                header("Location: ../index.php#home-page");
+            }
             exit();
         } else {
             $error = "Invalid password.";

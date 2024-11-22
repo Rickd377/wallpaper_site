@@ -87,5 +87,6 @@ $username = isset($_SESSION['Username']) ? $_SESSION['Username'] : 'Guest';
   </main>
   
   <script src="./js/general.js"></script>
+  <script src="./js/image.js"></script>
 </body>
 </html>
