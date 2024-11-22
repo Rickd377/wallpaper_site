@@ -59,9 +59,9 @@ p {
 #settings-page,
 #profile-page {
   width: 100dvw;
-  min-height: 100dvh;
-  padding: 150px 0 0;
+  height: 100dvh;
   display: none;
+  padding: 150px 7% 0 7%;
 }
 
 #home-page {
@@ -152,6 +152,11 @@ header .custom-select {
   display: inline-block;
   width: 210px;
 }
+@media screen and (max-width: 480px) {
+  header .custom-select {
+    width: 150px;
+  }
+}
 header .custom-select .select-selected {
   background-color: #fff;
   border: 2px solid #273449;
@@ -166,6 +171,11 @@ header .custom-select .select-selected {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+}
+@media screen and (max-width: 480px) {
+  header .custom-select .select-selected {
+    height: 40px;
+  }
 }
 header .custom-select .select-selected:after {
   content: "\f078";
@@ -205,7 +215,6 @@ header .custom-select .select-hide {
 #home-page .main-container {
   width: 100%;
   height: 100%;
-  padding: 0 7%;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -236,4 +245,145 @@ header .custom-select .select-hide {
 }
 #home-page .main-container .image-container img:hover {
   filter: brightness(0.9);
+}
+
+#register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#register-page .icon-back {
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  cursor: pointer;
+  font-size: 2rem;
+}
+#register-page form {
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+  width: 450px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+}
+#register-page form .error {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+}
+#register-page form .requirements p {
+  font-size: 0.9rem;
+}
+#register-page form .requirements ul {
+  padding-left: 20px;
+  list-style: disc;
+}
+#register-page form .requirements ul li {
+  color: #ff4d4d;
+  font-size: 0.8rem;
+}
+#register-page form .requirements ul li.valid {
+  color: #00d471;
+}
+#register-page form .input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+}
+#register-page form .input-wrapper .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+#register-page form .input-wrapper .fa-eye {
+  right: 11px;
+}
+#register-page form .input-wrapper input {
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  outline: none;
+  padding: 5px 8px;
+  padding-right: 40px;
+  width: 100%;
+}
+#register-page form button[type=submit] {
+  border-radius: 3px;
+  background-color: #273449;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 5px 8px;
+  width: 100%;
+}
+#register-page form .account-text {
+  font-size: 0.9rem;
+  color: #273449;
+  text-align: center;
+  width: 100%;
+}
+#register-page form .account-text a {
+  color: #4b638b;
+  text-decoration: underline;
+}
+
+#profile-page {
+  padding-bottom: calc(4rem + 60px);
+  position: relative;
+}
+#profile-page .container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px;
+  height: 100%;
+}
+#profile-page .container > * {
+  border-radius: 15px;
+  box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+#profile-page .container .saved-items {
+  background-color: #fff;
+  grid-row: span 3;
+}
+#profile-page .container .saved-items .fa-heart {
+  color: #ff4d4d;
+  margin-right: 10px;
+}
+#profile-page .container .welcome-message {
+  background-color: #273449;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+#profile-page .container .welcome-message .logout-btn {
+  text-decoration: underline;
+  color: #fff;
+  cursor: pointer;
+}
+#profile-page .container .user-info {
+  grid-row: span 2;
+  background-color: #4b638b;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+}
+#profile-page .container .user-info h2 {
+  margin-bottom: 20px;
 }/*# sourceMappingURL=style.css.map */

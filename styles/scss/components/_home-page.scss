@@ -4,7 +4,6 @@
   .main-container {
     width: 100%;
     height: 100%;
-    padding: 0 7%;
     @include flex(start, center, column);
 
     .image-container {

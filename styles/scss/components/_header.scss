@@ -30,6 +30,10 @@ header {
     display: inline-block;
     width: 210px;
 
+    @include mobile {
+      width: 150px;
+    }
+
     .select-selected {
       background-color: $white_color;
       border: 2px solid $stormy-blue_color;
@@ -39,6 +43,10 @@ header {
       user-select: none;
       position: relative;
       @include flex(space-between);
+
+      @include mobile {
+        height: 40px;
+      }
 
       &:after {
         content: '\f078';

@@ -1,0 +1,96 @@
+#register-page {
+  @include flex(center, center, column);
+
+  .icon-back {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  form {
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 4px 2px 10px rgba($black_color, 0.1);
+    gap: 20px;
+    width: 450px;
+    background-color: $white_color;
+    @include flex(space-between, start, column);
+
+    .error {
+      color: $warning_color;
+      font-size: 0.9rem;
+    }
+
+    .requirements {
+      p {
+        font-size: 0.9rem;
+      }
+
+      ul {
+        padding-left: 20px;
+        list-style: disc;
+
+        li {
+          color: $warning_color;
+          font-size: 0.8rem;
+
+          &.valid {
+            color: $success_color;
+          }
+        }
+      }
+    }
+    
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+      @include flex(space-between, start, column);
+
+      .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .fa-eye {
+        right: 11px;
+      }
+
+      input {
+        border-radius: 3px;
+        border: 1px solid darken($white_color, 20%);
+        outline: none;
+        padding: 5px 8px;
+        padding-right: 40px;
+        width: 100%;
+      }
+    }
+
+    button[type="submit"] {
+      border-radius: 3px;
+      background-color: $stormy-blue_color;
+      color: $white_color;
+      border: none;
+      outline: none;
+      padding: 5px 8px;
+      width: 100%;
+    }
+    
+    .account-text {
+      font-size: 0.9rem;
+      color: $text_color;
+      text-align: center;
+      width: 100%;
+
+      a {
+        color: lighten($stormy-blue_color, 20%);
+        text-decoration: underline;
+      }
+    }
+  }
+}

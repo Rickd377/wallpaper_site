@@ -1,23 +1,39 @@
 // Handle icon clicks
 const icons = document.querySelectorAll('.collections, .search, .home, .settings, .profile');
 const pages = document.querySelectorAll('#collection-page, #search-page, #home-page, #settings-page, #profile-page');
+const nav = document.querySelector('nav');
+const customSelect = document.querySelector('.custom-select');
+
+function showPage(targetId, updateHash = true) {
+  pages.forEach(page => {
+    if (page.id === targetId) {
+      page.style.display = 'block';
+    } else {
+      page.style.display = 'none';
+    }
+  });
+  icons.forEach(icon => {
+    if (icon.getAttribute('data-target') === targetId) {
+      icon.classList.add('active');
+    } else {
+      icon.classList.remove('active');
+    }
+  });
+  if (targetId === 'home-page') {
+    customSelect.style.display = 'block';
+  } else {
+    customSelect.style.display = 'none';
+  }
+  if (updateHash) {
+    window.location.hash = targetId;
+  }
+}
 
 icons.forEach(icon => {
   icon.addEventListener('click', (e) => {
     e.preventDefault();
-    if (!icon.classList.contains('active')) {
-      icons.forEach(i => i.classList.remove('active'));
-      icon.classList.add('active');
-
-      const targetId = icon.getAttribute('data-target');
-      pages.forEach(page => {
-        if (page.id === targetId) {
-          page.style.display = 'block';
-        } else {
-          page.style.display = 'none';
-        }
-      });
-    }
+    const targetId = icon.getAttribute('data-target');
+    showPage(targetId);
   });
 });
 
@@ -44,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function filterImages(device) {
     images.forEach(img => {
-      if (device === 'all' || img.src.includes(device)) {
+      if (device === 'all' || img.getAttribute('data-device') === device) {
         img.style.display = 'block';
       } else {
         img.style.display = 'none';
@@ -74,6 +90,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  shuffleImages(); // Shuffle images on page load
-  filterImages('all'); // Show all images by default
+  shuffleImages();
+  filterImages('all');
+
+  // Handle profile link click
+  const profileLink = document.getElementById('profile-link');
+  profileLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isSignedIn = document.body.getAttribute('data-signed-in') === 'true';
+    if (isSignedIn) {
+      // Navigate to profile page
+      showPage('profile-page');
+    } else {
+      window.location.href = './php/register.php';
+    }
+  });
+
+  // Show the page based on the URL hash
+  const hash = window.location.hash.substring(1);
+  if (hash) {
+    showPage(hash, false);
+  } else {
+    showPage('home-page', false);
+  }
 });
