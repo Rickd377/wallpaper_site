@@ -27,6 +27,26 @@ nav {
     }
   }
 
+  .admin-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    aspect-ratio: 1;
+    border-radius: $high_br;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: $stormy-blue_color;
+
+    &:hover {
+      background-color: lighten($stormy-blue_color, 20%);
+    }
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
   @include tablet {
     width: 70%;
   }

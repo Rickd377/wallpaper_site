@@ -1,13 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@keyframes outline {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.7));
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  }
+}
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -68,6 +76,10 @@ p {
   display: block;
 }
 
+body.logged-out #profile-page {
+  display: none;
+}
+
 nav {
   position: fixed;
   z-index: 1000;
@@ -101,6 +113,23 @@ nav > * {
 nav > *.active {
   color: #fff;
   background-color: #273449;
+}
+nav .admin-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70%;
+  aspect-ratio: 1;
+  border-radius: 999rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #273449;
+}
+nav .admin-link:hover {
+  background-color: #4b638b;
+}
+nav .admin-link i {
+  margin-right: 5px;
 }
 @media screen and (max-width: 768px) {
   nav {
@@ -393,4 +422,100 @@ header .custom-select .select-hide {
 }
 #profile-page .container .user-info h2 {
   margin-bottom: 20px;
+}
+
+#admin-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#admin-page .icon-back {
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  cursor: pointer;
+  font-size: 2rem;
+}
+#admin-page form {
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+  width: 450px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+}
+#admin-page form h1 {
+  font-size: 2rem;
+  color: #273449;
+}
+#admin-page form h2 {
+  font-size: 1.5rem;
+  color: #273449;
+}
+#admin-page form .error {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+}
+#admin-page form .success {
+  color: #00d471;
+  font-size: 0.9rem;
+}
+#admin-page form .input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+}
+#admin-page form .input-wrapper .file-label {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #273449;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+#admin-page form .input-wrapper .file-label:hover {
+  background-color: #151c28;
+}
+#admin-page form .input-wrapper input[type=file] {
+  display: none;
+}
+#admin-page form .input-wrapper input,
+#admin-page form .input-wrapper select {
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  outline: none;
+  padding: 5px 8px;
+  width: 100%;
+}
+#admin-page form .input-wrapper #file-name {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #273449;
+}
+#admin-page form button[type=submit] {
+  border-radius: 3px;
+  background-color: #273449;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 5px 8px;
+  width: 100%;
+}
+#admin-page form .back-home {
+  text-align: center;
+  color: #273449;
+  text-decoration: none;
+}
+#admin-page form .back-home:hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=style.css.map */

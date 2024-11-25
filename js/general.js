@@ -1,4 +1,4 @@
-// Handle icon clicks
+// Handle icon clicks and page navigation
 const icons = document.querySelectorAll('.collections, .search, .home, .settings, .profile');
 const pages = document.querySelectorAll('#collection-page, #search-page, #home-page, #settings-page, #profile-page');
 const nav = document.querySelector('nav');
@@ -6,39 +6,42 @@ const customSelect = document.querySelector('.custom-select');
 
 function showPage(targetId, updateHash = true) {
   pages.forEach(page => {
-    if (page.id === targetId) {
-      page.style.display = 'block';
-    } else {
-      page.style.display = 'none';
-    }
+    page.style.display = page.id === targetId ? 'block' : 'none';
   });
   icons.forEach(icon => {
-    if (icon.getAttribute('data-target') === targetId) {
-      icon.classList.add('active');
-    } else {
-      icon.classList.remove('active');
-    }
+    icon.classList.toggle('active', icon.getAttribute('data-target') === targetId);
   });
-  if (targetId === 'home-page') {
-    customSelect.style.display = 'block';
-  } else {
-    customSelect.style.display = 'none';
-  }
+  customSelect.style.display = targetId === 'home-page' ? 'block' : 'none';
   if (updateHash) {
     window.location.hash = targetId;
   }
 }
 
-icons.forEach(icon => {
-  icon.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = icon.getAttribute('data-target');
-    showPage(targetId);
-  });
-});
-
-// Handle custom dropdown
+// Navigate to register page if not logged in
 document.addEventListener('DOMContentLoaded', () => {
+  const profileLink = document.getElementById('profile-link');
+  profileLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isSignedIn = document.body.getAttribute('data-signed-in') === 'true';
+    if (isSignedIn) {
+      // Show the profile page
+      showPage('profile-page');
+    } else {
+      // Redirect to the register page
+      window.location.href = './php/register.php';
+    }
+  });
+
+  // Initialize icon clicks for page navigation
+  icons.forEach(icon => {
+    icon.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = icon.getAttribute('data-target');
+      showPage(targetId);
+    });
+  });
+
+  // Handle custom dropdown
   const selectSelected = document.querySelector('.select-selected');
   const selectItems = document.querySelector('.select-items');
   const imageContainer = document.getElementById('image-container');
@@ -60,11 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function filterImages(device) {
     images.forEach(img => {
-      if (device === 'all' || img.getAttribute('data-device') === device) {
-        img.style.display = 'block';
-      } else {
-        img.style.display = 'none';
-      }
+      img.style.display = (device === 'all' || img.getAttribute('data-device') === device) ? 'block' : 'none';
     });
   }
 
@@ -90,27 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Shuffle images and set default filter
   shuffleImages();
   filterImages('all');
 
-  // Handle profile link click
-  const profileLink = document.getElementById('profile-link');
-  profileLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    const isSignedIn = document.body.getAttribute('data-signed-in') === 'true';
-    if (isSignedIn) {
-      // Navigate to profile page
-      showPage('profile-page');
-    } else {
-      window.location.href = './php/register.php';
-    }
-  });
-
   // Show the page based on the URL hash
   const hash = window.location.hash.substring(1);
-  if (hash) {
-    showPage(hash, false);
-  } else {
-    showPage('home-page', false);
-  }
+  showPage(hash || 'home-page', false);
 });

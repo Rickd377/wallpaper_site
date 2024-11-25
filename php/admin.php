@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './php/db_connection.php';
+include './db_connection.php'; // Corrected the path
 
 // Check if the user is an admin
 if (!isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
@@ -20,7 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Handle file upload
     if ($file['name']) {
-        $targetDir = "uploads/";
+        $targetDir = __DIR__ . '/../assets/uploads/'; // Ensure the correct path for uploads
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true); // Create the uploads directory if it doesn't exist
+        }
         $targetFile = $targetDir . basename($file["name"]);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
@@ -38,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 } else {
                     if (move_uploaded_file($file["tmp_name"], $targetFile)) {
-                        $url = $targetFile;
+                        $url = 'assets/uploads/' . basename($file["name"]); // Store relative path in the database
                     } else {
                         $error = "Sorry, there was an error uploading your file.";
                     }
@@ -70,45 +73,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Admin - Add Images</title>
 </head>
 <body id="admin-page">
-    <header>
-        <h1>Admin Panel</h1>
-        <a href="../index.php">Back to Home</a>
-    </header>
-    <main>
-        <h2>Add New Image</h2>
-        <?php if ($error): ?>
-            <p class="error"><?php echo $error; ?></p>
-        <?php endif; ?>
-        <?php if ($success): ?>
-            <p class="success"><?php echo $success; ?></p>
-        <?php endif; ?>
-        <form method="POST" action="admin.php" enctype="multipart/form-data">
-            <div class="input-wrapper">
-                <label for="theme">Theme:</label>
-                <input type="text" id="theme" name="theme" required>
-            </div>
-            <div class="input-wrapper">
-                <label for="category">Category:</label>
-                <input type="text" id="category" name="category" required>
-            </div>
-            <div class="input-wrapper">
-                <label for="device">Device:</label>
-                <select id="device" name="device" required>
-                    <option value="mobile">Mobile</option>
-                    <option value="tablet">Tablet</option>
-                    <option value="desktop">Desktop</option>
-                </select>
-            </div>
-            <div class="input-wrapper">
-                <label for="url">Image URL:</label>
-                <input type="text" id="url" name="url">
-            </div>
-            <div class="input-wrapper">
-                <label for="file">Or Upload File:</label>
-                <input type="file" id="file" name="file">
-            </div>
-            <button type="submit">Add Image</button>
-        </form>
-    </main>
+  <a class="icon-back" href="../index.php#home-page"><i class="fa-light fa-arrow-left"></i></a>
+  <form method="POST" action="admin.php" enctype="multipart/form-data">
+      <h1>Admin Panel</h1>
+      <h2>Add New Image</h2>
+      <a class="back-home" href="../index.php">Home preview</a>
+      <?php if ($error): ?>
+        <p class="error"><?php echo $error; ?></p>
+      <?php endif; ?>
+      <?php if ($success): ?>
+        <p class="success"><?php echo $success; ?></p>
+      <?php endif; ?>
+      <div class="input-wrapper">
+        <label for="theme">Theme:</label>
+        <input type="text" id="theme" name="theme" required>
+      </div>
+      <div class="input-wrapper">
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required>
+      </div>
+      <div class="input-wrapper">
+        <label for="device">Device:</label>
+        <select id="device" name="device" required>
+          <option value="mobile">Mobile</option>
+          <option value="tablet">Tablet</option>
+          <option value="desktop">Desktop</option>
+        </select>
+      </div>
+      <div class="input-wrapper">
+        <label for="url">Image URL:</label>
+        <input type="text" id="url" name="url">
+      </div>
+      <div class="input-wrapper">
+        <label for="file">Or Upload File:</label>
+        <input type="file" id="file" name="file">
+        <label for="file" class="file-label">Choose a file</label>
+        <span id="file-name"></span>
+      </div>
+      <button type="submit">Add Image</button>
+    </form>
+    <script>
+      document.getElementById('file').addEventListener('change', function() {
+        const fileName = this.files[0].name;
+        document.getElementById('file-name').textContent = fileName;
+      });
+    </script>
 </body>
 </html>

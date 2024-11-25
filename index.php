@@ -6,7 +6,10 @@ include './php/db_connection.php';
 $sql = "SELECT url, device FROM wallpapers";
 $result = $conn->query($sql);
 
-$username = isset($_SESSION['Username']) ? $_SESSION['Username'] : 'Guest';
+// Determine user state
+$isSignedIn = isset($_SESSION['ID']);
+$username = $isSignedIn ? $_SESSION['Username'] : 'Guest';
+$isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +22,7 @@ $username = isset($_SESSION['Username']) ? $_SESSION['Username'] : 'Guest';
   <link rel="stylesheet" href="./styles/dist/css/style.css">
   <title>Wallo</title>
 </head>
-<body data-signed-in="<?php echo isset($_SESSION['ID']) ? 'true' : 'false'; ?>">
+<body class="<?php echo $isSignedIn ? 'logged-in' : 'logged-out'; ?>" data-signed-in="<?php echo $isSignedIn ? 'true' : 'false'; ?>">
 
   <header>
     <div class="title-wrapper">
@@ -43,47 +46,59 @@ $username = isset($_SESSION['Username']) ? $_SESSION['Username'] : 'Guest';
     <a href="#" class="search" data-target="search-page"><i class="fa-sharp fa-light fa-magnifying-glass"></i></a>
     <a href="#" class="home active" data-target="home-page"><i class="fa-sharp fa-light fa-house"></i></a>
     <a href="#" class="settings" data-target="settings-page"><i class="fa-light fa-gear"></i></a>
-    <a href="#" class="profile" id="profile-link" data-target="profile-page"><i class="fa-light fa-user"></i></a>
+    <?php if ($isSignedIn): ?>
+      <a href="#" class="profile" id="profile-link" data-target="profile-page"><i class="fa-light fa-user"></i></a>
+      <?php if ($isAdmin): ?>
+        <a href="./php/admin.php" class="admin-link"><i class="fa-light fa-user-shield"></i></a>
+      <?php endif; ?>
+    <?php else: ?>
+      <a href="./php/register.php" class="profile" id="profile-link"><i class="fa-light fa-user"></i></a>
+    <?php endif; ?>
   </nav>
 
   <main>
+    <!-- Collection Page -->
     <div id="collection-page"></div>
 
+    <!-- Search Page -->
     <div id="search-page"></div>
 
+    <!-- Home Page -->
     <div id="home-page">
       <div class="main-container">
         <div class="image-container" id="image-container">
-        <?php
-        if ($result->num_rows > 0) {
-          while($row = $result->fetch_assoc()) {
-            echo '<img src="' . htmlspecialchars($row["url"]) . '" data-device="' . htmlspecialchars($row["device"]) . '" alt="wallpaper" loading="eager">';
-          }
-        } else {
-          echo "No wallpapers found.";
-        }
-        $conn->close();
-        ?>
+          <?php if ($result->num_rows > 0): ?>
+            <?php while($row = $result->fetch_assoc()): ?>
+              <img src="<?php echo htmlspecialchars($row['url']); ?>" data-device="<?php echo htmlspecialchars($row['device']); ?>" alt="wallpaper" loading="eager">
+            <?php endwhile; ?>
+          <?php else: ?>
+            <p>No wallpapers found.</p>
+          <?php endif; ?>
+          <?php $conn->close(); ?>
         </div>
       </div>
     </div>
 
+    <!-- Settings Page -->
     <div id="settings-page"></div>
 
-    <div id="profile-page">
-      <div class="container">
-        <div class="saved-items">
-          <h2><i class="fa-sharp fa-solid fa-heart"></i> Saved wallpapers</h2>
-          <div class="saved-items-container"></div>
-        </div>
-        <div class="welcome-message">
-          <h1>Welcome <?php echo htmlspecialchars($username); ?>, <a href="./php/logout.php" class="logout-btn">Logout</a></h1>
-        </div>
-        <div class="user-info">
-          <h2>Change your login data:</h2>
+    <!-- Profile Page -->
+    <?php if ($isSignedIn): ?>
+      <div id="profile-page">
+        <div class="container">
+          <div class="saved-items">
+            <h2><i class="fa-sharp fa-solid fa-heart"></i> Saved wallpapers</h2>
+            <div class="saved-items-container"></div>
+          </div>
+          <div class="welcome-message">
+            <h1>Welcome <?php echo htmlspecialchars($username); ?>, <a href="./php/logout.php" class="logout-btn">Logout</a></h1>
+          </div>
+          <div class="user-info">
+            <h2>Change your login data:</h2>
+          </div>
         </div>
       </div>
-    </div>
+    <?php endif; ?>
   </main>
   
   <script src="./js/general.js"></script>
