@@ -17,11 +17,13 @@
 
       img {
         width: 100%;
+        height: auto; // Maintain aspect ratio
         margin-bottom: 20px;
         border-radius: 15px;
         box-shadow: 4px 2px 10px rgba($black_color, 0.1);
         cursor: pointer;
         transition: filter 0.3s;
+        object-fit: cover; // Ensure the image covers the container while maintaining aspect ratio
       
         &.selected {
           position: fixed;

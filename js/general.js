@@ -55,16 +55,38 @@ document.addEventListener('DOMContentLoaded', () => {
     return array;
   }
 
+  function distributeImagesEvenly(images, columns) {
+    const columnWrappers = Array.from({ length: columns }, () => document.createElement('div'));
+    columnWrappers.forEach(wrapper => {
+      wrapper.style.columnCount = 1;
+      wrapper.style.columnGap = '20px';
+      wrapper.style.width = '100%';
+    });
+
+    // Ensure each column gets at least one image
+    images.forEach((img, index) => {
+      columnWrappers[index % columns].appendChild(img);
+    });
+
+    // Distribute remaining images
+    let columnIndex = 0;
+    for (let i = columns; i < images.length; i++) {
+      columnWrappers[columnIndex].appendChild(images[i]);
+      columnIndex = (columnIndex + 1) % columns;
+    }
+
+    imageContainer.innerHTML = '';
+    columnWrappers.forEach(wrapper => imageContainer.appendChild(wrapper));
+  }
+
   function shuffleImages() {
     const shuffledImages = shuffle(images);
-    imageContainer.innerHTML = '';
-    shuffledImages.forEach(img => imageContainer.appendChild(img));
+    distributeImagesEvenly(shuffledImages, 5);
   }
 
   function filterImages(device) {
-    images.forEach(img => {
-      img.style.display = (device === 'all' || img.getAttribute('data-device') === device) ? 'block' : 'none';
-    });
+    const filteredImages = images.filter(img => device === 'all' || img.getAttribute('data-device') === device);
+    distributeImagesEvenly(filteredImages, 5);
   }
 
   selectSelected.addEventListener('click', () => {
@@ -86,6 +108,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!e.target.closest('.custom-select')) {
       selectItems.classList.add('select-hide');
       selectSelected.classList.remove('select-arrow-active');
+    }
+  });
+
+  // Prevent default drag behavior on custom select
+  customSelect.addEventListener('dragstart', (e) => e.preventDefault());
+  customSelect.addEventListener('dragover', (e) => e.preventDefault());
+  customSelect.addEventListener('drop', (e) => e.preventDefault());
+
+  // Prevent multiple selections
+  selectItems.addEventListener('mousedown', (e) => {
+    if (e.target.tagName === 'DIV') {
+      selectSelected.textContent = e.target.textContent;
+      selectSelected.dataset.value = e.target.dataset.value;
+      selectItems.classList.add('select-hide');
+      selectSelected.classList.remove('select-arrow-active');
+      filterImages(selectSelected.dataset.value);
     }
   });
 

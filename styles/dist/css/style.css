@@ -125,12 +125,6 @@ nav .admin-link {
   transition: all 0.3s;
   color: #273449;
 }
-nav .admin-link:hover {
-  background-color: #4b638b;
-}
-nav .admin-link i {
-  margin-right: 5px;
-}
 @media screen and (max-width: 768px) {
   nav {
     width: 70%;
@@ -264,11 +258,14 @@ header .custom-select .select-hide {
 }
 #home-page .main-container .image-container img {
   width: 100%;
+  height: auto;
   margin-bottom: 20px;
   border-radius: 15px;
   box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: filter 0.3s;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 #home-page .main-container .image-container img.selected {
   position: fixed;
@@ -441,7 +438,7 @@ header .custom-select .select-hide {
   padding: 30px;
   border-radius: 15px;
   box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.1);
-  gap: 20px;
+  gap: 10px;
   width: 450px;
   background-color: #fff;
   display: flex;
@@ -472,6 +469,9 @@ header .custom-select .select-hide {
   justify-content: space-between;
   align-items: start;
   flex-direction: column;
+}
+#admin-page form .input-wrapper .tags {
+  color: #1b75d0;
 }
 #admin-page form .input-wrapper .file-label {
   margin-top: 10px;
@@ -514,8 +514,5 @@ header .custom-select .select-hide {
 #admin-page form .back-home {
   text-align: center;
   color: #273449;
-  text-decoration: none;
-}
-#admin-page form .back-home:hover {
   text-decoration: underline;
 }/*# sourceMappingURL=style.css.map */

@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];
     $device = $_POST['device'];
     $url = $_POST['url'];
+    $tags = $_POST['tags'];
     $file = $_FILES['file'];
 
     // Handle file upload
@@ -51,7 +52,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (!$error) {
-        $sql = "INSERT INTO wallpapers (url, theme, category, device) VALUES ('$url', '$theme', '$category', '$device')";
+        // Find the lowest available ID
+        $result = $conn->query("SELECT MIN(t1.id + 1) AS next_id FROM wallpapers t1 LEFT JOIN wallpapers t2 ON t1.id + 1 = t2.id WHERE t2.id IS NULL");
+        $row = $result->fetch_assoc();
+        $nextId = $row['next_id'] ?? 1; // Default to 1 if no rows are found
+
+        // Insert the new image with the lowest available ID
+        $sql = "INSERT INTO wallpapers (id, url, theme, category, device, tags) VALUES ('$nextId', '$url', '$theme', '$category', '$device', '$tags')";
         if ($conn->query($sql) === TRUE) {
             $success = "Image added successfully.";
         } else {
@@ -74,9 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body id="admin-page">
   <a class="icon-back" href="../index.php#home-page"><i class="fa-light fa-arrow-left"></i></a>
-  <form method="POST" action="admin.php" enctype="multipart/form-data">
-      <h1>Admin Panel</h1>
-      <h2>Add New Image</h2>
+  <form id="admin-form" method="POST" action="admin.php" enctype="multipart/form-data">
+      <h1>Add New Image</h1>
       <a class="back-home" href="../index.php">Home preview</a>
       <?php if ($error): ?>
         <p class="error"><?php echo $error; ?></p>
@@ -101,6 +107,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </select>
       </div>
       <div class="input-wrapper">
+        <label for="tags">Tags (comma-separated):</label>
+        <input type="text" id="tags" name="tags" class="tags">
+      </div>
+      <div class="input-wrapper">
         <label for="url">Image URL:</label>
         <input type="text" id="url" name="url">
       </div>
@@ -117,6 +127,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const fileName = this.files[0].name;
         document.getElementById('file-name').textContent = fileName;
       });
+
+      // Reset the form after a successful submission
+      if (<?php echo json_encode($success); ?>) {
+        document.getElementById('admin-form').reset();
+        document.getElementById('file-name').textContent = '';
+      }
     </script>
 </body>
 </html>

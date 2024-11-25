@@ -13,7 +13,7 @@
     padding: 30px;
     border-radius: 15px;
     box-shadow: 4px 2px 10px rgba($black_color, 0.1);
-    gap: 20px;
+    gap: 10px;
     width: 450px;
     background-color: $white_color;
     @include flex(space-between, start, column);
@@ -42,6 +42,10 @@
       position: relative;
       width: 100%;
       @include flex(space-between, start, column);
+
+      .tags {
+        color: $link_color;
+      }
 
       .file-label {
         margin-top: 10px;
@@ -91,10 +95,7 @@
     .back-home {
       text-align: center;
       color: $stormy-blue_color;
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
+      text-decoration: underline;
     }
   }
 }
