@@ -1,6 +1,6 @@
 // Handle icon clicks and page navigation
-const icons = document.querySelectorAll('.collections, .search, .home, .settings, .profile');
-const pages = document.querySelectorAll('#collection-page, #search-page, #home-page, #settings-page, #profile-page');
+const icons = document.querySelectorAll('.collections, .search, .home, .ai, .profile');
+const pages = document.querySelectorAll('#collection-page, #search-page, #home-page, #ai-page, #profile-page');
 const nav = document.querySelector('nav');
 const customSelect = document.querySelector('.custom-select');
 

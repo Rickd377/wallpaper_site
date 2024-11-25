@@ -3,7 +3,7 @@ session_start();
 include './php/db_connection.php';
 
 // Fetch wallpapers
-$sql = "SELECT url, device FROM wallpapers";
+$sql = "SELECT url, device FROM wallo_wallpapers";
 $result = $conn->query($sql);
 
 // Determine user state
@@ -26,7 +26,9 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
 
   <header>
     <div class="title-wrapper">
-      <img src="./assets/wallo_logo.png" alt="logo">
+      <a href="index.php#home-page">
+        <img src="./assets/wallo_logo.png" alt="logo">
+      </a>
       <h1 class="title">Wallo</h1>
     </div>
   
@@ -45,7 +47,7 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
     <a href="#" class="collections" data-target="collection-page"><i class="fa-sharp fa-light fa-album-collection"></i></a>
     <a href="#" class="search" data-target="search-page"><i class="fa-sharp fa-light fa-magnifying-glass"></i></a>
     <a href="#" class="home active" data-target="home-page"><i class="fa-sharp fa-light fa-house"></i></a>
-    <a href="#" class="settings" data-target="settings-page"><i class="fa-light fa-gear"></i></a>
+    <a href="#" class="ai" data-target="ai-page"><i class="fa-light fa-microchip-ai"></i></a>
     <?php if ($isSignedIn): ?>
       <a href="#" class="profile" id="profile-link" data-target="profile-page"><i class="fa-light fa-user"></i></a>
       <?php if ($isAdmin): ?>
@@ -79,8 +81,8 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
       </div>
     </div>
 
-    <!-- Settings Page -->
-    <div id="settings-page"></div>
+    <!-- ai Page -->
+    <div id="ai-page">asdfasdf</div>
 
     <!-- Profile Page -->
     <?php if ($isSignedIn): ?>

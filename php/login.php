@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Check if the input is a username or email
-    $sql = "SELECT * FROM users WHERE Username='$usernameOrEmail' OR Email='$usernameOrEmail'";
+    $sql = "SELECT * FROM wallo_users WHERE Username='$usernameOrEmail' OR Email='$usernameOrEmail'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

@@ -7,7 +7,6 @@ if (!isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
     header("Location: ../index.php");
     exit();
 }
-
 $error = '';
 $success = '';
 
@@ -53,12 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$error) {
         // Find the lowest available ID
-        $result = $conn->query("SELECT MIN(t1.id + 1) AS next_id FROM wallpapers t1 LEFT JOIN wallpapers t2 ON t1.id + 1 = t2.id WHERE t2.id IS NULL");
+        $result = $conn->query("SELECT MIN(t1.id + 1) AS next_id FROM wallo_wallpapers t1 LEFT JOIN wallo_wallpapers t2 ON t1.id + 1 = t2.id WHERE t2.id IS NULL");
         $row = $result->fetch_assoc();
         $nextId = $row['next_id'] ?? 1; // Default to 1 if no rows are found
 
         // Insert the new image with the lowest available ID
-        $sql = "INSERT INTO wallpapers (id, url, theme, category, device, tags) VALUES ('$nextId', '$url', '$theme', '$category', '$device', '$tags')";
+        $sql = "INSERT INTO wallo_wallpapers (id, url, theme, category, device, tags) VALUES ('$nextId', '$url', '$theme', '$category', '$device', '$tags')";
         if ($conn->query($sql) === TRUE) {
             $success = "Image added successfully.";
         } else {

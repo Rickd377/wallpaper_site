@@ -64,7 +64,7 @@ p {
 #collection-page,
 #search-page,
 #home-page,
-#settings-page,
+#ai-page,
 #profile-page {
   width: 100dvw;
   height: 100dvh;
@@ -254,6 +254,18 @@ header .custom-select .select-hide {
   #home-page .main-container .image-container {
     -moz-column-count: 2;
          column-count: 2;
+  }
+}
+@media screen and (max-width: 768px) {
+  #home-page .main-container .image-container {
+    -moz-column-count: 3;
+         column-count: 3;
+  }
+}
+@media screen and (max-width: 1024px) {
+  #home-page .main-container .image-container {
+    -moz-column-count: 4;
+         column-count: 4;
   }
 }
 #home-page .main-container .image-container img {

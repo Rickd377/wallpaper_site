@@ -8,13 +8,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $email = $_POST['email'];
 
-    $sql = "SELECT * FROM users WHERE Username='$username' OR Email='$email'";
+    $sql = "SELECT * FROM wallo_users WHERE Username='$username' OR Email='$email'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $error = "Username or email already in use.";
     } else {
-        $sql = "SELECT ID FROM users ORDER BY ID";
+        $sql = "SELECT ID FROM wallo_users ORDER BY ID";
         $result = $conn->query($sql);
         $lowestAvailableId = 1;
 
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        $sql = "INSERT INTO users (ID, Username, Password, Email) VALUES ('$lowestAvailableId', '$username', '$password', '$email')";
+        $sql = "INSERT INTO wallo_users (ID, Username, Password, Email) VALUES ('$lowestAvailableId', '$username', '$password', '$email')";
 
         if ($conn->query($sql) === TRUE) {
             header("Location: ./login.php");

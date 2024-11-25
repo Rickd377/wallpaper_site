@@ -14,6 +14,14 @@
       @include mobile {
         column-count: 2;
       }
+      
+      @include tablet {
+        column-count: 3;
+      }
+
+      @include laptop {
+        column-count: 4;
+      }
 
       img {
         width: 100%;
