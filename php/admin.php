@@ -262,6 +262,7 @@ $conn->close();
         <table>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Image</th>
               <th>Collections</th>
               <th>Device</th>
@@ -271,6 +272,7 @@ $conn->close();
           <tbody>
             <?php foreach ($wallpapers as $wallpaper): ?>
             <tr>
+              <td><?php echo htmlspecialchars($wallpaper['id']); ?></td>
               <td><img src="../<?php echo htmlspecialchars($wallpaper['url']); ?>?<?php echo time(); ?>" alt="image"></td>
               <td><?php echo htmlspecialchars($wallpaper['collections']); ?></td>
               <td><?php echo htmlspecialchars($wallpaper['device']); ?></td>

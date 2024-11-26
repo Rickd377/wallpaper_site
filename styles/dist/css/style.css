@@ -537,6 +537,7 @@ header .custom-select .select-hide {
 #admin-page form.image-form table tr td img, #admin-page form.user-form table tr td img {
   height: 40px;
   border-radius: 3px;
+  margin: auto;
 }
 #admin-page form.image-form table tr td a, #admin-page form.user-form table tr td a {
   color: #1b75d0;
