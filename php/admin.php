@@ -11,8 +11,7 @@ $error = '';
 $success = '';
 
 // Handle image form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['theme'])) {
-    $theme = $_POST['theme'];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['device'])) {
     $device = $_POST['device'];
     $url = $_POST['url'];
     $tags = $_POST['tags'];
@@ -59,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['theme'])) {
         $nextId = $row['next_id'] ?? 1; // Default to 1 if no rows are found
 
         // Insert the new image with the lowest available ID
-        $sql = "INSERT INTO wallo_wallpapers (id, url, theme, device, tags) VALUES ('$nextId', '$url', '$theme', '$device', '$tags')";
+        $sql = "INSERT INTO wallo_wallpapers (id, url, device, tags) VALUES ('$nextId', '$url', '$device', '$tags')";
         if ($conn->query($sql) === TRUE) {
             // Insert into wallo_image_collections
             foreach ($collections as $collectionId) {
@@ -196,10 +195,6 @@ $conn->close();
         <?php if ($success): ?>
           <p class="success"><?php echo $success; ?></p>
         <?php endif; ?>
-        <div class="input-wrapper">
-          <label for="theme">Theme:</label>
-          <input type="text" id="theme" name="theme" required>
-        </div>
         <div class="input-wrapper">
           <label for="device">Device:</label>
           <select id="device" name="device" required>

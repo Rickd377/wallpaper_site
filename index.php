@@ -6,6 +6,20 @@ include './php/db_connection.php';
 $sql = "SELECT url, device FROM wallo_wallpapers";
 $result = $conn->query($sql);
 
+// Fetch collections and a random image from each collection
+$collections_sql = "
+    SELECT c.id, c.name, (
+        SELECT w.url 
+        FROM wallo_wallpapers w
+        JOIN wallo_image_collections ic ON w.id = ic.image_id
+        WHERE ic.collection_id = c.id
+        ORDER BY RAND()
+        LIMIT 1
+    ) AS url
+    FROM wallo_collections c
+";
+$collections_result = $conn->query($collections_sql);
+
 // Determine user state
 $isSignedIn = isset($_SESSION['ID']);
 $username = $isSignedIn ? $_SESSION['Username'] : 'Guest';
@@ -61,7 +75,19 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
   <main>
     <!-- Collection Page -->
     <div id="collection-page">
-      Collection page
+      <div class="main-container">
+        <div class="collections-container">
+          <?php if ($collections_result->num_rows > 0): ?>
+            <?php while($collection = $collections_result->fetch_assoc()): ?>
+              <div class="collection-item" data-collection-id="<?php echo $collection['id']; ?>" style="background-image: url('<?php echo htmlspecialchars($collection['url']); ?>');">
+                <h3><?php echo htmlspecialchars($collection['name']); ?></h3>
+              </div>
+            <?php endwhile; ?>
+          <?php else: ?>
+            <p>No collections found.</p>
+          <?php endif; ?>
+        </div>
+      </div>
     </div>
 
     <!-- Search Page -->
@@ -100,5 +126,16 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
   
   <script src="./js/general.js"></script>
   <script src="./js/image.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Handle collection item click
+      document.querySelectorAll('.collection-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const collectionId = item.getAttribute('data-collection-id');
+          window.location.href = `./collection.php?id=${collectionId}`;
+        });
+      });
+    });
+  </script>
 </body>
 </html>

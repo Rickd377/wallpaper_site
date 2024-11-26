@@ -63,17 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapper.style.width = '100%';
     });
 
-    // Ensure each column gets at least one image
+    // Distribute images evenly across columns
     images.forEach((img, index) => {
       columnWrappers[index % columns].appendChild(img);
     });
-
-    // Distribute remaining images
-    let columnIndex = 0;
-    for (let i = columns; i < images.length; i++) {
-      columnWrappers[columnIndex].appendChild(images[i]);
-      columnIndex = (columnIndex + 1) % columns;
-    }
 
     imageContainer.innerHTML = '';
     columnWrappers.forEach(wrapper => imageContainer.appendChild(wrapper));
