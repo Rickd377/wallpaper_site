@@ -60,10 +60,14 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
 
   <main>
     <!-- Collection Page -->
-    <div id="collection-page"></div>
+    <div id="collection-page">
+      Collection page
+    </div>
 
     <!-- Search Page -->
-    <div id="search-page"></div>
+    <div id="search-page">
+      Search page
+    </div>
 
     <!-- Home Page -->
     <div id="home-page">
@@ -82,23 +86,14 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
     </div>
 
     <!-- ai Page -->
-    <div id="ai-page">asdfasdf</div>
+    <div id="ai-page">
+      Ai page
+    </div>
 
     <!-- Profile Page -->
     <?php if ($isSignedIn): ?>
       <div id="profile-page">
-        <div class="container">
-          <div class="saved-items">
-            <h2><i class="fa-sharp fa-solid fa-heart"></i> Saved wallpapers</h2>
-            <div class="saved-items-container"></div>
-          </div>
-          <div class="welcome-message">
-            <h1>Welcome <?php echo htmlspecialchars($username); ?>, <a href="./php/logout.php" class="logout-btn">Logout</a></h1>
-          </div>
-          <div class="user-info">
-            <h2>Change your login data:</h2>
-          </div>
-        </div>
+        
       </div>
     <?php endif; ?>
   </main>

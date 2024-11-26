@@ -1,22 +1,22 @@
-#admin-page {
-  @include flex(center, center, column);
+// grid-area: row-start / column-start / row-end / column-end;
 
-  .icon-back {
-    position: absolute;
-    left: 2rem;
-    top: 2rem;
-    cursor: pointer;
-    font-size: 2rem;
-  }
+#admin-page {
+  padding: 40px 30% 0 30%;
+  @include flex(start, center, column);
 
   form {
+    margin-bottom: 40px;
+  }
+
+  form.admin-form {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 4px 2px 10px rgba($black_color, 0.1);
     gap: 10px;
-    width: 450px;
+    width: 100%;
+    height: auto;
     background-color: $white_color;
-    @include flex(space-between, start, column);
+    @include flex(center, start, column);
 
     h1 {
       font-size: 2rem;
@@ -49,11 +49,11 @@
 
       .file-label {
         margin-top: 10px;
-        padding: 10px;
+        padding: 5px 8px;
         background-color: $stormy-blue_color;
         color: $white_color;
         text-align: center;
-        border-radius: 5px;
+        border-radius: 3px;
         cursor: pointer;
         transition: background-color 0.3s;
 
@@ -90,6 +90,10 @@
       outline: none;
       padding: 5px 8px;
       width: 100%;
+
+      &:hover {
+        background-color: darken($stormy-blue_color, 10%);
+      }
     }
 
     .back-home {
@@ -97,5 +101,127 @@
       color: $stormy-blue_color;
       text-decoration: underline;
     }
+  }
+
+  form.collection-form {
+    @extend .admin-form;
+
+    .existing-collections {
+      width: 100%;
+
+      ul {
+        width: 100%;
+        overflow-y: scroll;
+        height: 75px;
+        border: 1px solid darken($white_color, 20%);
+        border-radius: 3px;
+        padding: 10px;
+        @include flex(space-between, start, column);
+
+        li {
+          @include flex(space-between);
+          width: 100%;
+        }
+
+        .delete-button {
+          border: none;
+          outline: none;
+          background-color: transparent;
+          color: $stormy-blue_color;
+          width: auto;
+        }
+
+        .delete-user {
+          cursor: pointer;
+          transition: color 0.2s;
+
+    
+          &:hover {
+            color: $warning_color;
+          }
+        }
+      }
+    }
+  }
+
+  form.collection-edit {
+    @extend .admin-form;
+    @extend .collection-form;
+  }
+
+  form.image-form {
+    @extend .admin-form;
+    justify-content: start;
+    max-height: 500px;
+    overflow-y: auto;
+
+    table {
+      width: 100%;
+      text-align: center;
+
+      th:first-child {
+        text-align: left;
+      }
+
+      th:last-child {
+        text-align: right;
+      }
+
+      tr {
+        height: 50px;
+        vertical-align: middle;
+
+        td {
+
+          &:first-child {
+            text-align: left;
+          }
+
+          &:last-child {
+            text-align: right;
+          }
+          
+          img {
+            height: 40px;
+            border-radius: 3px;
+          }
+
+          a {
+            color: $link_color;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  form.user-form {
+    @extend .admin-form;
+    @extend .image-form;
+
+    td {
+      font-size: 0.9rem;
+    }
+
+    .delete-user-button {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: $stormy-blue_color;
+      width: auto;
+    }
+
+    .delete-user {
+      cursor: pointer;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $warning_color;
+      }
+    }
+  }
+  
+  form.add-admin-form {
+    @extend .admin-form;
   }
 }

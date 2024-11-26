@@ -133,5 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Show the page based on the URL hash
   const hash = window.location.hash.substring(1);
-  showPage(hash || 'home-page', false);
+  if (!hash) {
+    window.location.hash = 'home-page';
+    showPage('home-page', false);
+  } else {
+    showPage(hash, false);
+  }
 });
+
+// Set the URL hash to home-page if it is empty
+if (!window.location.hash) {
+  window.location.hash = 'home-page';
+}

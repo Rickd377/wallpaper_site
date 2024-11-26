@@ -11,16 +11,16 @@
       column-gap: 20px;
       width: 100%;
 
-      @include mobile {
-        column-count: 2;
+      @include laptop {
+        column-count: 4;
       }
       
       @include tablet {
         column-count: 3;
       }
-
-      @include laptop {
-        column-count: 4;
+      
+      @include mobile {
+        column-count: 2;
       }
 
       img {

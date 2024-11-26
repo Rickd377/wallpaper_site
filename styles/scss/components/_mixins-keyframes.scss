@@ -22,15 +22,3 @@
     @content;
   }
 }
-
-@keyframes outline {
-  0% {
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-  }
-  50% {
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.7));
-  }
-  100% {
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-  }
-}
