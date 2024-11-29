@@ -63,7 +63,6 @@ p {
 
 #home-page {
   display: block;
-  height: 100%;
 }
 
 body.logged-out #profile-page {
@@ -237,8 +236,6 @@ header .custom-select .select-hide {
   -moz-column-gap: 20px;
        column-gap: 20px;
   width: 100%;
-  flex-grow: 1;
-  padding-bottom: 50px;
 }
 @media screen and (max-width: 1024px) {
   #home-page .main-container .image-container {
@@ -268,6 +265,11 @@ header .custom-select .select-hide {
   transition: filter 0.3s;
   -o-object-fit: cover;
      object-fit: cover;
+}
+@media screen and (max-width: 1024px) {
+  #home-page .main-container .image-container img {
+    border-radius: 10px;
+  }
 }
 #home-page .main-container .image-container img.selected {
   position: fixed;
@@ -379,10 +381,20 @@ header .custom-select .select-hide {
   align-items: center;
   flex-direction: column;
 }
+@media screen and (max-width: 1024px) {
+  #admin-page {
+    padding: 40px 15% 0 15%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #admin-page {
+    padding: 40px 7% 0 7%;
+  }
+}
 #admin-page form {
   margin-bottom: 40px;
 }
-#admin-page form.admin-form, #admin-page form.add-admin-form, #admin-page form.user-form, #admin-page form.image-form, #admin-page form.collection-edit, #admin-page form.collection-form {
+#admin-page form.admin-form, #admin-page form.user-form, #admin-page form.image-form, #admin-page form.collection-edit, #admin-page form.collection-form {
   padding: 30px;
   border-radius: 15px;
   box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.1);
@@ -395,23 +407,23 @@ header .custom-select .select-hide {
   align-items: start;
   flex-direction: column;
 }
-#admin-page form.admin-form h1, #admin-page form.add-admin-form h1, #admin-page form.user-form h1, #admin-page form.image-form h1, #admin-page form.collection-edit h1, #admin-page form.collection-form h1 {
+#admin-page form.admin-form h1, #admin-page form.user-form h1, #admin-page form.image-form h1, #admin-page form.collection-edit h1, #admin-page form.collection-form h1 {
   font-size: 2rem;
   color: #273449;
 }
-#admin-page form.admin-form h2, #admin-page form.add-admin-form h2, #admin-page form.user-form h2, #admin-page form.image-form h2, #admin-page form.collection-edit h2, #admin-page form.collection-form h2 {
+#admin-page form.admin-form h2, #admin-page form.user-form h2, #admin-page form.image-form h2, #admin-page form.collection-edit h2, #admin-page form.collection-form h2 {
   font-size: 1.5rem;
   color: #273449;
 }
-#admin-page form.admin-form .error, #admin-page form.add-admin-form .error, #admin-page form.user-form .error, #admin-page form.image-form .error, #admin-page form.collection-edit .error, #admin-page form.collection-form .error {
+#admin-page form.admin-form .error, #admin-page form.user-form .error, #admin-page form.image-form .error, #admin-page form.collection-edit .error, #admin-page form.collection-form .error {
   color: #ff4d4d;
   font-size: 0.9rem;
 }
-#admin-page form.admin-form .success, #admin-page form.add-admin-form .success, #admin-page form.user-form .success, #admin-page form.image-form .success, #admin-page form.collection-edit .success, #admin-page form.collection-form .success {
+#admin-page form.admin-form .success, #admin-page form.user-form .success, #admin-page form.image-form .success, #admin-page form.collection-edit .success, #admin-page form.collection-form .success {
   color: #00d471;
   font-size: 0.9rem;
 }
-#admin-page form.admin-form .input-wrapper, #admin-page form.add-admin-form .input-wrapper, #admin-page form.user-form .input-wrapper, #admin-page form.image-form .input-wrapper, #admin-page form.collection-edit .input-wrapper, #admin-page form.collection-form .input-wrapper {
+#admin-page form.admin-form .input-wrapper, #admin-page form.user-form .input-wrapper, #admin-page form.image-form .input-wrapper, #admin-page form.collection-edit .input-wrapper, #admin-page form.collection-form .input-wrapper {
   position: relative;
   width: 100%;
   display: flex;
@@ -419,10 +431,10 @@ header .custom-select .select-hide {
   align-items: start;
   flex-direction: column;
 }
-#admin-page form.admin-form .input-wrapper .tags, #admin-page form.add-admin-form .input-wrapper .tags, #admin-page form.user-form .input-wrapper .tags, #admin-page form.image-form .input-wrapper .tags, #admin-page form.collection-edit .input-wrapper .tags, #admin-page form.collection-form .input-wrapper .tags {
+#admin-page form.admin-form .input-wrapper .tags, #admin-page form.user-form .input-wrapper .tags, #admin-page form.image-form .input-wrapper .tags, #admin-page form.collection-edit .input-wrapper .tags, #admin-page form.collection-form .input-wrapper .tags {
   color: #1b75d0;
 }
-#admin-page form.admin-form .input-wrapper .file-label, #admin-page form.add-admin-form .input-wrapper .file-label, #admin-page form.user-form .input-wrapper .file-label, #admin-page form.image-form .input-wrapper .file-label, #admin-page form.collection-edit .input-wrapper .file-label, #admin-page form.collection-form .input-wrapper .file-label {
+#admin-page form.admin-form .input-wrapper .file-label, #admin-page form.user-form .input-wrapper .file-label, #admin-page form.image-form .input-wrapper .file-label, #admin-page form.collection-edit .input-wrapper .file-label, #admin-page form.collection-form .input-wrapper .file-label {
   margin-top: 10px;
   padding: 5px 8px;
   background-color: #273449;
@@ -432,15 +444,14 @@ header .custom-select .select-hide {
   cursor: pointer;
   transition: background-color 0.3s;
 }
-#admin-page form.admin-form .input-wrapper .file-label:hover, #admin-page form.add-admin-form .input-wrapper .file-label:hover, #admin-page form.user-form .input-wrapper .file-label:hover, #admin-page form.image-form .input-wrapper .file-label:hover, #admin-page form.collection-edit .input-wrapper .file-label:hover, #admin-page form.collection-form .input-wrapper .file-label:hover {
+#admin-page form.admin-form .input-wrapper .file-label:hover, #admin-page form.user-form .input-wrapper .file-label:hover, #admin-page form.image-form .input-wrapper .file-label:hover, #admin-page form.collection-edit .input-wrapper .file-label:hover, #admin-page form.collection-form .input-wrapper .file-label:hover {
   background-color: #151c28;
 }
-#admin-page form.admin-form .input-wrapper input[type=file], #admin-page form.add-admin-form .input-wrapper input[type=file], #admin-page form.user-form .input-wrapper input[type=file], #admin-page form.image-form .input-wrapper input[type=file], #admin-page form.collection-edit .input-wrapper input[type=file], #admin-page form.collection-form .input-wrapper input[type=file] {
+#admin-page form.admin-form .input-wrapper input[type=file], #admin-page form.user-form .input-wrapper input[type=file], #admin-page form.image-form .input-wrapper input[type=file], #admin-page form.collection-edit .input-wrapper input[type=file], #admin-page form.collection-form .input-wrapper input[type=file] {
   display: none;
 }
-#admin-page form.admin-form .input-wrapper input, #admin-page form.add-admin-form .input-wrapper input, #admin-page form.user-form .input-wrapper input, #admin-page form.image-form .input-wrapper input, #admin-page form.collection-edit .input-wrapper input, #admin-page form.collection-form .input-wrapper input,
+#admin-page form.admin-form .input-wrapper input, #admin-page form.user-form .input-wrapper input, #admin-page form.image-form .input-wrapper input, #admin-page form.collection-edit .input-wrapper input, #admin-page form.collection-form .input-wrapper input,
 #admin-page form.admin-form .input-wrapper select,
-#admin-page form.add-admin-form .input-wrapper select,
 #admin-page form.user-form .input-wrapper select,
 #admin-page form.image-form .input-wrapper select,
 #admin-page form.collection-edit .input-wrapper select,
@@ -451,12 +462,12 @@ header .custom-select .select-hide {
   padding: 5px 8px;
   width: 100%;
 }
-#admin-page form.admin-form .input-wrapper #file-name, #admin-page form.add-admin-form .input-wrapper #file-name, #admin-page form.user-form .input-wrapper #file-name, #admin-page form.image-form .input-wrapper #file-name, #admin-page form.collection-edit .input-wrapper #file-name, #admin-page form.collection-form .input-wrapper #file-name {
+#admin-page form.admin-form .input-wrapper #file-name, #admin-page form.user-form .input-wrapper #file-name, #admin-page form.image-form .input-wrapper #file-name, #admin-page form.collection-edit .input-wrapper #file-name, #admin-page form.collection-form .input-wrapper #file-name {
   margin-top: 10px;
   font-size: 0.9rem;
   color: #273449;
 }
-#admin-page form.admin-form button[type=submit], #admin-page form.add-admin-form button[type=submit], #admin-page form.user-form button[type=submit], #admin-page form.image-form button[type=submit], #admin-page form.collection-edit button[type=submit], #admin-page form.collection-form button[type=submit] {
+#admin-page form.admin-form button[type=submit], #admin-page form.user-form button[type=submit], #admin-page form.image-form button[type=submit], #admin-page form.collection-edit button[type=submit], #admin-page form.collection-form button[type=submit] {
   border-radius: 3px;
   background-color: #273449;
   color: #fff;
@@ -465,10 +476,10 @@ header .custom-select .select-hide {
   padding: 5px 8px;
   width: 100%;
 }
-#admin-page form.admin-form button[type=submit]:hover, #admin-page form.add-admin-form button[type=submit]:hover, #admin-page form.user-form button[type=submit]:hover, #admin-page form.image-form button[type=submit]:hover, #admin-page form.collection-edit button[type=submit]:hover, #admin-page form.collection-form button[type=submit]:hover {
+#admin-page form.admin-form button[type=submit]:hover, #admin-page form.user-form button[type=submit]:hover, #admin-page form.image-form button[type=submit]:hover, #admin-page form.collection-edit button[type=submit]:hover, #admin-page form.collection-form button[type=submit]:hover {
   background-color: #151c28;
 }
-#admin-page form.admin-form .back-home, #admin-page form.add-admin-form .back-home, #admin-page form.user-form .back-home, #admin-page form.image-form .back-home, #admin-page form.collection-edit .back-home, #admin-page form.collection-form .back-home {
+#admin-page form.admin-form .back-home, #admin-page form.user-form .back-home, #admin-page form.image-form .back-home, #admin-page form.collection-edit .back-home, #admin-page form.collection-form .back-home {
   text-align: center;
   color: #273449;
   text-decoration: underline;
@@ -560,6 +571,7 @@ header .custom-select .select-hide {
 #admin-page form.user-form .delete-user:hover {
   color: #ff4d4d;
 }
+
 #collection-page .main-container {
   width: 100%;
   height: -moz-fit-content;
@@ -593,7 +605,7 @@ header .custom-select .select-hide {
   display: flex;
   align-items: flex-end;
   padding: 10px;
-  color: white;
+  color: #fff;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
@@ -616,7 +628,7 @@ header .custom-select .select-hide {
   margin: 0;
 }
 #collection-page .main-container .collections-container .collection-item:hover::before {
-  filter: brightness(0.9);
+  filter: brightness(0.78);
 }
 
 #collection-images-page {
@@ -638,8 +650,6 @@ header .custom-select .select-hide {
   -moz-column-gap: 20px;
        column-gap: 20px;
   width: 100%;
-  flex-grow: 1;
-  padding-bottom: 50px;
 }
 @media screen and (max-width: 1024px) {
   #collection-images-page .main-container .image-container {

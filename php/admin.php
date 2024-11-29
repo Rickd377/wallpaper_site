@@ -312,19 +312,6 @@ $conn->close();
           </tbody>
         </table>
     </form>
-
-    <form action="admin.php" method="POST" class="add-admin-form">
-        <h2>Add/Remove Admin</h2>
-        <div class="input-wrapper">
-          <label for="user-id">User id (add admin rights):</label>
-          <input type="text" name="user-id" id="user-id">
-        </div>
-        <div class="input-wrapper">
-          <label for="user-id-remove">User id (remove admin rights):</label>
-          <input type="text" name="user-id-remove" id="user-id-remove">
-        </div>
-        <button type="submit">Submit</button>
-    </form>
   <script>
     document.getElementById('file').addEventListener('change', function() {
       const fileName = this.files[0].name;
@@ -394,31 +381,6 @@ $conn->close();
             console.error('Error:', error);
           });
         }
-      });
-    });
-
-    // JavaScript to handle add/remove admin rights form submission
-    document.querySelector('.add-admin-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const userId = document.getElementById('user-id').value;
-      const userIdRemove = document.getElementById('user-id-remove').value;
-      const formData = new FormData();
-      if (userId) {
-        formData.append('user-id', userId);
-      }
-      if (userIdRemove) {
-        formData.append('user-id-remove', userIdRemove);
-      }
-      fetch('admin.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.text())
-      .then(data => {
-        location.reload();
-      })
-      .catch(error => {
-        console.error('Error:', error);
       });
     });
 

@@ -2,8 +2,8 @@
 session_start();
 include './php/db_connection.php';
 
-// Fetch wallpapers
-$sql = "SELECT url, device FROM wallo_wallpapers";
+// Fetch wallpapers in random order
+$sql = "SELECT url, device FROM wallo_wallpapers ORDER BY RAND()";
 $result = $conn->query($sql);
 
 // Fetch collections and a random image from each collection
@@ -79,7 +79,7 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
         <div class="collections-container">
           <?php if ($collections_result->num_rows > 0): ?>
             <?php while($collection = $collections_result->fetch_assoc()): ?>
-              <div class="collection-item" data-collection-id="<?php echo $collection['id']; ?>" style="background-image: url('<?php echo htmlspecialchars($collection['url']); ?>');">
+              <div class="collection-item" data-collection-id="<?php echo $collection['id']; ?>" data-collection-name="<?php echo htmlspecialchars($collection['name']); ?>" style="background-image: url('<?php echo htmlspecialchars($collection['url']); ?>');">
                 <h3><?php echo htmlspecialchars($collection['name']); ?></h3>
               </div>
             <?php endwhile; ?>
@@ -131,8 +131,8 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
       // Handle collection item click
       document.querySelectorAll('.collection-item').forEach(item => {
         item.addEventListener('click', () => {
-          const collectionId = item.getAttribute('data-collection-id');
-          window.location.href = `./collection.php?id=${collectionId}`;
+          const collectionName = item.getAttribute('data-collection-name');
+          window.location.href = `./collection.php#${collectionName.replace(/\s+/g, '-').toLowerCase()}`;
         });
       });
     });

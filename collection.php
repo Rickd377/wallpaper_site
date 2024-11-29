@@ -4,10 +4,11 @@ include './php/db_connection.php';
 
 $collectionId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Fetch collection images
+// Fetch collection images in random order
 $sql = "SELECT w.url, w.device FROM wallo_wallpapers w
         JOIN wallo_image_collections ic ON w.id = ic.image_id
-        WHERE ic.collection_id = $collectionId";
+        WHERE ic.collection_id = $collectionId
+        ORDER BY RAND()";
 $result = $conn->query($sql);
 
 // Fetch collection name
@@ -68,14 +69,6 @@ $collection_name = $collection_name_result->fetch_assoc()['name'];
       const imageContainer = document.getElementById('image-container');
       const images = Array.from(imageContainer.getElementsByTagName('img'));
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-      }
-
       function distributeImagesEvenly(images, columns) {
         const columnWrappers = Array.from({ length: columns }, () => document.createElement('div'));
         columnWrappers.forEach(wrapper => {
@@ -84,18 +77,21 @@ $collection_name = $collection_name_result->fetch_assoc()['name'];
           wrapper.style.width = '100%';
         });
 
-        // Distribute images evenly across columns
-        images.forEach((img, index) => {
-          columnWrappers[index % columns].appendChild(img);
-        });
+        // Calculate the number of images per column
+        const imagesPerColumn = Math.floor(images.length / columns);
+        const remainder = images.length % columns;
+
+        let imageIndex = 0;
+        for (let i = 0; i < columns; i++) {
+          const columnImageCount = imagesPerColumn + (i < remainder ? 1 : 0);
+          for (let j = 0; j < columnImageCount; j++) {
+            columnWrappers[i].appendChild(images[imageIndex]);
+            imageIndex++;
+          }
+        }
 
         imageContainer.innerHTML = '';
         columnWrappers.forEach(wrapper => imageContainer.appendChild(wrapper));
-      }
-
-      function shuffleImages() {
-        const shuffledImages = shuffle(images);
-        distributeImagesEvenly(shuffledImages, 5);
       }
 
       function filterImages(device) {
@@ -126,7 +122,6 @@ $collection_name = $collection_name_result->fetch_assoc()['name'];
       });
 
       // Shuffle images and set default filter
-      shuffleImages();
       filterImages('all');
 
       // Update URL hash with collection name

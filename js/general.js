@@ -47,14 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const imageContainer = document.getElementById('image-container');
   const images = Array.from(imageContainer.getElementsByTagName('img'));
 
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
   function distributeImagesEvenly(images, columns) {
     const columnWrappers = Array.from({ length: columns }, () => document.createElement('div'));
     columnWrappers.forEach(wrapper => {
@@ -70,11 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     imageContainer.innerHTML = '';
     columnWrappers.forEach(wrapper => imageContainer.appendChild(wrapper));
-  }
-
-  function shuffleImages() {
-    const shuffledImages = shuffle(images);
-    distributeImagesEvenly(shuffledImages, 5);
   }
 
   function filterImages(device) {
@@ -121,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Shuffle images and set default filter
-  shuffleImages();
   filterImages('all');
 
   // Show the page based on the URL hash

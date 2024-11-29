@@ -9,8 +9,6 @@
       column-count: 5;
       column-gap: 20px;
       width: 100%;
-      flex-grow: 1;
-      padding-bottom: 50px;
 
       @include laptop {
         column-count: 4;
@@ -33,6 +31,10 @@
         cursor: pointer;
         transition: filter 0.3s;
         object-fit: cover; // Ensure the image covers the container while maintaining aspect ratio
+
+        @include laptop {
+          border-radius: 10px;
+        }
       
         &.selected {
           position: fixed;
